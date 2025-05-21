@@ -53,3 +53,15 @@ export async function getApiDesc(
     return d;
   }, retry);
 }
+
+export async function getApisDesc(
+  apiIds: (string | number)[],
+  conf: Conf,
+  retry = 2
+) {
+  if (!Array.isArray(apiIds) || apiIds.length === 0) {
+    throw new Error("apiIds 不能为空数组");
+  }
+  // 并发获取所有 API 信息
+  return Promise.all(apiIds.map((id) => getApiDesc(id, conf, retry)));
+}
