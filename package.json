@@ -1,0 +1,38 @@
+{
+  "name": "yapi-mcp-server",
+  "version": "1.0.7",
+  "description": "YApi MCP Server",
+  "keywords": [
+    "yapi",
+    "mcp",
+    "server"
+  ],
+  "source": "index.js",
+  "main": "dist/index.js",
+  "bin": {
+    "yapi-mcp-server": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.4",
+    "axios": "^1.9.0",
+    "zod": "^3.25.7"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.15.21",
+    "parcel": "^2.15.1",
+    "rollup": "^4.41.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
+}
