@@ -1,20 +1,16 @@
 #!/usr/bin/env node
-import {
-  McpServer,
-  ResourceTemplate,
-} from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
-import { getApiDesc } from "./yapi.js";
-import { getCliParams } from "./utils.js";
-import { Conf } from "./types/index.js";
+import { getApiDesc, checkConf } from "./yapi.js";
+import z from "zod";
+
+const conf = checkConf();
 // Create an MCP server
 const server = new McpServer({
   name: "YApi MCP Server",
   version: "1.0.0",
 });
 
-const conf = getCliParams() as unknown as Conf;
 // 获取API接口详情
 server.tool(
   "yapi_get_api_desc",
@@ -24,9 +20,11 @@ server.tool(
       .string()
       .describe("YApi接口的ID；如连接/project/1/interface/api/66，则ID为66"),
   },
-  async ({ apiId }) => {
+  async ({ apiId }: { apiId: string }) => {
     try {
       const apiDesc = await getApiDesc(apiId, conf);
+      // 日志增强
+      console.info("获取到的API详情:", JSON.stringify(apiDesc, null, 2));
 
       // 格式化返回数据，使其更易于阅读
       const formattedResponse = {
@@ -60,8 +58,10 @@ server.tool(
         ],
       };
     } catch (error) {
+      const errMsg = error instanceof Error ? error.message : String(error);
+      console.error("获取API接口出错:", errMsg, error);
       return {
-        content: [{ type: "text", text: `获取API接口出错: ${error}` }],
+        content: [{ type: "text", text: `获取API接口出错: ${errMsg}` }],
       };
     }
   }
