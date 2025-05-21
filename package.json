@@ -12,6 +12,10 @@
   "bin": {
     "yapi-mcp-server": "./dist/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinLiJ/yapi-mcp-server.git"
+  },
   "scripts": {
     "dev": "rollup -c -w",
     "clean": "rm -rf dist",
