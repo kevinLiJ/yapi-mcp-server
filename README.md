@@ -34,10 +34,70 @@
 
 ## MCP Server 功能
 
-- **工具名**：`yapi_get_api_desc`
-- **功能**：获取 YApi 接口详情
-- **参数说明**：
-  - `apiId`：YApi 接口的 ID（如 `/project/1/interface/api/66`，则 ID 为 66）
+- **工具名**：`yapi_get_apis_detail`
+- **功能**：批量获取 YApi 接口的详细信息。
+- **参数**：
+  - `apiIds`：YApi 接口 ID 组成的数组。例如，接口地址为 `/project/1/interface/api/66`，则 ID 为 `66`。支持同时传入多个 ID。
+- **返回值**：对应接口的详细信息对象数组，结构与 YApi 返回一致。
+
+---
+
+## 实践
+
+`mcp`配置成功之后，直接对`cursor`说：
+
+```
+生成接口代码
+@api/index.ts
+@https://yapi.XXX.net/project/13533/interface/api/1554281
+@https://yapi.XXX.net/project/13533/interface/api/1554288
+@https://yapi.XXX.net/project/13533/interface/api/1554334
+```
+
+`cursor`就会调用`yapi-mcp-server`获取接口的信息，并根据项目代码规范，生成对应的接口代码，比如:
+
+```ts
+// 删除组织：https://yapi.XXX.net/project/13533/interface/api/1554334
+export function deleteOrg(data: { id: number }) {
+  return axios({
+    url: "/goapi/admin/org/delete",
+    method: "post",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+```
+
+**_ai 可以给 接口函数起名字，爽歪歪！_**
+
+### 制定规范，使生成的接口代码更符合规范
+
+在 .cursorrules 文件中，编写接口代码的规范，比如:
+
+```md
+// .cursorrules
+
+接口代码规范：
+
+- apiName 驼峰且动词前置
+- 使用 axiosInstance
+- 注释需包含接口名和 yapi 文档链接
+- headers 有需要再加
+
+import { axiosInstance as axios } from '@/api/axiosToken'
+
+// {{$value.title}}：{{$value.yapiDocUrl}}
+export function {{$value.apiName}}(data) {
+return axios({
+url: '{{$value.path}}',
+method: '{{$value.method}}',
+data,
+// headers: { ... } // 如有自定义 header 再补充
+})
+}
+```
 
 ---
 

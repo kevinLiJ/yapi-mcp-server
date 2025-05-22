@@ -96,7 +96,7 @@ const server = new McpServer({
     version: "1.0.0",
 });
 // 获取API接口详情
-server.tool("get_apis_desc", "获取YApi接口详情，支持同时获取多个", {
+server.tool("yapi_get_apis_detail", "获取YApi接口详情，支持同时获取多个", {
     apiIds: z
         .array(z.string().or(z.number()))
         .describe("YApi接口的ID数组；如链接/project/1/interface/api/66，则ID为66"),

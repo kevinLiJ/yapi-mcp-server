@@ -13,7 +13,7 @@ const server = new McpServer({
 
 // 获取API接口详情
 server.tool(
-  "get_apis_desc",
+  "yapi_get_apis_detail",
   "获取YApi接口详情，支持同时获取多个",
   {
     apiIds: z
