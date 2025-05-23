@@ -1,5 +1,17 @@
 # yapi-mcp-server
 
+## 1.0.18
+
+### Patch Changes
+
+- ac3db1b: 修改了标点符号
+
+## 1.0.17
+
+### Patch Changes
+
+- 修改了一个冒号
+
 ## 1.0.16
 
 ### Patch Changes
