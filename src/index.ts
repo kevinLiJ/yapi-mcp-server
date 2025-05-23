@@ -66,7 +66,7 @@ server.tool(
       const errMsg = error instanceof Error ? error.message : String(error);
       console.error("获取API接口出错：", errMsg, error);
       return {
-        content: [{ type: "text", text: `获取API接口出错: ${errMsg}` }],
+        content: [{ type: "text", text: `获取API接口出错： ${errMsg}` }],
       };
     }
   }
