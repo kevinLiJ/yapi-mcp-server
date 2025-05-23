@@ -2,7 +2,7 @@
 
 ## 简介
 
-`yapi-mcp-server` 是 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) 的服务端实现。支持通过 MCP 协议获取 YApi 接口详情，适用于自动化、智能体等场景。
+`yapi-mcp-server` 是 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) 的服务端实现。支持通过 MCP 协议获取 YApi 接口详情。
 
 ---
 

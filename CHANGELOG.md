@@ -1,5 +1,11 @@
 # yapi-mcp-server
 
+## 1.0.16
+
+### Patch Changes
+
+- style:修改一个标点符号
+
 ## 1.0.15
 
 ### Patch Changes
