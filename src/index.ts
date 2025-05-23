@@ -25,8 +25,6 @@ server.tool(
   async ({ apiIds }: { apiIds: (string | number)[] }) => {
     try {
       const apisDesc = await getApisDesc(apiIds, conf);
-      // 日志增强
-      console.info("获取到的API详情:", JSON.stringify(apisDesc, null, 2));
 
       // 格式化返回数据，使其更易于阅读
       return {
